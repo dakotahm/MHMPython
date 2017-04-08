@@ -1,11 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
+{% extends "RecordEvent/nav.html" %}
+
 {% block content %}
+<div class="container" contenteditable="false">
+  <h1 class="">Record Event</h1>
+
+
+  <div class="dropdown padding">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+
+  <div class="inline padding">
+    <p class="">Value:</p>
+  		<input type="number" placeholder="text input" class="form-control">
+  </div>
+
+  <div class="inline padding">
+      <p class="">Tags:</p>
+  		<div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Insert Tag</button>
+      </span>
+    </div>
+  </div>
+
+  <div class="inline padding">
+      <p class="">Location:</p>
+  		<input type="text" placeholder="text input" class="form-control">
+  </div>
+
+</div>
 {% endblock %}
-</body>
-</html>
