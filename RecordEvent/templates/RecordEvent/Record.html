@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container-fixed" contenteditable="false">
   <h1 class="">Record Event</h1>
-
+<form action="/addLogSubmit/" method="post">
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -23,14 +23,14 @@
     </div>
 
   <div class=" inline padding row " >
-   <div class="col-lg-1"><p class="centerVert"  >Value:</p></div>
-     <div class="col-lg-5"> <input type="number" placeholder="text input" class="form-control"/></div>
+   <div class="col-lg-1"><p class="centerVert" >Value:</p></div>
+     <div class="col-lg-5"> <input id="valueText" type="number" placeholder="text input" class="form-control"/></div>
   </div>
 
   <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Tags:</p></div>
   		<div class="input-group col-lg-5">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input  id="tagText"  type="text" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Insert Tag</button>
       </span>
@@ -39,26 +39,26 @@
 
   <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Location:</p></div>
-  		<div class="col-lg-5"><input type="text" placeholder="text input" class="form-control"></div>
+  		<div class="col-lg-5"><input id="locationText" type="text" placeholder="text input" class="form-control"></div>
   </div>
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Date: </p></div>
-  		<div class="col-lg-5"><input type="text" placeholder="text input" id="DatePicker" class="form-control"></div>
+  		<div class="col-lg-5"><input  type="text" placeholder="text input" id="DatePicker" class="form-control"></div>
     </div>
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Time: </p></div>
-  		<div class="col-lg-5"><input type="text" placeholder="text input" id="TimePicker" class="time_element form-control"></div>
+  		<div class="col-lg-5"><input  type="text" placeholder="text input" id="TimePicker" class="time_element form-control"></div>
     </div>
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Log: </p></div>
-  		<div class="col-lg-5"><textarea  placeholder="text input" id="TimePicker" class="form-control"></textarea></div>
+  		<div class="col-lg-5"><textarea  placeholder="text input" id="LogText" class="form-control"></textarea></div>
     </div>
  <div class="inline padding row">
-      <button class="pull-right" type="button" aria-haspopup="true" aria-expanded="true">Submit</button>
+      <input class="pull-right" type="submit" >Submit</input>
     </div>
-
+</form>
 </div>
 {% endblock %}
