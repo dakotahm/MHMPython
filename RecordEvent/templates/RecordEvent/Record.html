@@ -4,7 +4,9 @@
 {% block content %}
 <div class="container-fixed" contenteditable="false">
   <h1 class="">Record Event</h1>
-<form action="/addLogSubmit/" method="post">
+<form action="" method="post">
+    {% csrf_token %}
+    {{ LogForm }}
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

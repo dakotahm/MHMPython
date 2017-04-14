@@ -6,8 +6,8 @@ def index(request):
 
         form=LogForm(request.POST)
 
-        if form.isvalid():
-            pass
+        if form.is_valid():
+            print(form.valueText)
 
     else:
         form=LogForm()
