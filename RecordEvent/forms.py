@@ -6,3 +6,7 @@ class LogForm(forms.Form):
     locationText = forms.CharField(100)
     DatePicker = forms.CharField(100)
     TimePicker = forms.CharField(100)
+
+    def is_valid(self):
+        return True
+3
