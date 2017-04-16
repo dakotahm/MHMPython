@@ -18,3 +18,9 @@
 {
    cursor: pointer;
 }
+.read{
+    background: white;
+}
+.disabled{
+    opacity: 0.65;
+}

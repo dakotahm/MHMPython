@@ -1,0 +1,52 @@
+{% extends "RecordEvent/nav.html" %}
+
+{% block content %}
+<div class="container-fixed" contenteditable="false">
+  <h1 class="">Record Event</h1>
+<form action="" method="post">
+    {% csrf_token %}
+
+<div class="row">
+  <div class="dropdown padding col-lg-6">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <span id="dropdownTitle" class="" max="" min="">Meausurable</span>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li type="value"><a  href="#">Value</a></li>
+      <li type="boolean"><a  href="#">Boolean</a></li>
+  </ul>
+</div>
+    </div>
+
+
+
+    <div class="inline padding row">
+      <div class="col-lg-1"> <p class="">Name:</p></div>
+  		<div class="col-lg-5"><input id="locationText" name="name" value="" type="text" placeholder="text input" class="form-control"></div>
+  </div>
+
+    <div class=" inline padding row " >
+   <div class="col-lg-1"><p class="centerVert" >Max:</p></div>
+     <div class="col-lg-5"> <input id="id_valueText"  type="number" name="max" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
+  </div>
+
+     <div class=" inline padding row " >
+   <div class="col-lg-1"><p class="centerVert" >Min:</p></div>
+     <div class="col-lg-5"> <input id="id_valueText"  type="number" name="min" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
+  </div>
+
+
+
+    <input id="measurable" type="text" style="display: none" value="-1" name="measureId"/>
+
+
+    <div class="inline padding row">
+  		<div class="col-lg-6"> <input id="submitDisabled" class="pull-right disabled" type="submit" disabled="disabled" ></input></div>
+    </div>
+
+</form>
+
+
+</div>
+{% endblock %}

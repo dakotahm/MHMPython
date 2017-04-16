@@ -10,14 +10,14 @@
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span id="dropdownTitle" class="" max="" min="">Meausurable</span>
+    <span id="dropdownTitle" class="" max="" min="">Type</span>
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     {% include 'RecordEvent/includes/EntryDropdown.html' %}
   </ul>
 </div>
-    <div class="col-lg-3"> <a class="pull-right" href="#">Create Measurable</a></div>
+    <div class="col-lg-3"> <a class="pull-right" href="collect/AddMeasurable">Create Measurable</a></div>
     </div>
 
 
@@ -45,12 +45,12 @@
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Date: </p></div>
-  		<div class="col-lg-5"><input type="text" name="date"  placeholder="text input" style="cursor: pointer" readonly="readonly" id="DatePicker" class="form-control read"></div>
+  		<div class="col-lg-5"><input type="text" name="date"  placeholder="Default Now" style="cursor: pointer" readonly="readonly" id="DatePicker" class="form-control read"></div>
     </div>
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Time: </p></div>
-  		<div class="col-lg-5"><input type="text" name="time" value="" placeholder="text input" style="cursor: pointer" readonly="readonly" id="TimePicker" class="time_element form-control read"></div>
+  		<div class="col-lg-5"><input type="text" name="time" value="" placeholder="Default now" style="cursor: pointer" readonly="readonly" id="TimePicker" class="time_element form-control read"></div>
     </div>
 
     <div class="inline padding row">
@@ -62,13 +62,17 @@
 
 
     <div class="inline padding row">
-  		<div class="col-lg-6"> <input class="pull-right" type="submit"  ></input></div>
+  		<div class="col-lg-6"> <input id="submitDisabled" class="pull-right disabled" type="submit" disabled="disabled" ></input></div>
     </div>
 
 </form>
 
-</div>
-    <script>
+{#<script>#}
+{#    var theDate=new Date();#}
+{#    document.getElementById("DatePicker").value="Testing";#}
+{#    console.log("working");#}
+{#</script>#}
 
-    </script>
+</div>
+
 {% endblock %}
