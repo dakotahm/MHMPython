@@ -2,7 +2,7 @@ from django.shortcuts import render
 from LogIn import models
 
 
-def LoginView(request):
+def index(request):
 
         from .forms import LoginForm
         if request.method == 'POST':

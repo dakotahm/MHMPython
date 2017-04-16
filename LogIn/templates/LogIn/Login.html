@@ -1,24 +1,40 @@
-{% block content %}
 
 <!-- TODO: upon success, redirect to RecordEvent -->
 <!-- TODO: validate against Users in DB, not admin -->
 
-    <header>
-        <h1>LogIn</h1>
-        {% if user.is_authenticated %}
-          Hi {{ user.username }}!
-          <a href="">logout</a>
-        {% else %}
-          <a href="">login</a>
-        {% endif %}
-      </header>
-      <hr>
-      <main>
-        <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-      </form>
-      </main>
+{% block content %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+
+    <div>
+      <td>{{ form.username.label_tag }}</td>
+      <td>{{ form.username }}</td>
+    </div>
+    <div>
+      <td>{{ form.password.label_tag }}</td>
+      <td>{{ form.password }}</td>
+    </div>
+
+    <div>
+      <input type="submit" value="login" />
+      <input type="hidden" name="next" value="" />
+    </div>
+</form>
+
+<!-- TODO: Registration -->
 
 {% endblock %}

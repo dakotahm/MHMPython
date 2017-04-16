@@ -77,7 +77,15 @@
                             </li>
                 </ul>
                 </li>
+
+
                 </ul>
+
+                <!-- Redirect user to login page upon clicking "Log Out" -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'login' %}" class="">Log Out</a></li>
+                </ul>
+
             </div>
             <!--/.nav-collapse -->
         </div>
