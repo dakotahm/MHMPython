@@ -3,7 +3,7 @@ from LogIn import models
 
 
 def LoginView(request):
-    def index(request):
+
         from .forms import LoginForm
         if request.method == 'POST':
 
@@ -16,7 +16,8 @@ def LoginView(request):
 
             if form.is_valid():
                 print(request.POST)
-                print(request.POST.get('value', -1))
+                username = request.POST.get('username', '')
+                password = request.POST.get('password', '')
 
             else:
                 print("Form not valid")
@@ -24,6 +25,5 @@ def LoginView(request):
         else:
             form = LoginForm()
             print("blank form")
-        return render(request, 'RecordEvent/Record.html')
 
-    return render(request,'LogIn/Login.html')
+        return render(request,'LogIn/Login.html')
