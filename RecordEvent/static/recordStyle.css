@@ -13,3 +13,8 @@
 .centerVert{
     padding-top: 5px;
 }
+
+.read:hover
+{
+   cursor: pointer;
+}
