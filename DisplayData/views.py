@@ -3,8 +3,10 @@ from django.http import JsonResponse
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def DisplayView(request):
     return render(request,'DisplayData/Display.html')
 
@@ -26,6 +28,8 @@ class ChartData(APIView):
 			"customers": 10,
 		}	
 		return Response(data)
+
+
 
 
 

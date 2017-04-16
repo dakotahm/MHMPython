@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^$', include('RecordEvent.urls'),name='index'),
     url(r'^collect/', include('RecordEvent.urls')),
     url(r'^display/', include('DisplayData.urls')),
-    url(r'^Aids/', include('TreatmentAid.urls')),
+    url(r'^aids/', include('TreatmentAid.urls')),
     url(r'^login/', include('LogIn.urls')),
 ]
 
