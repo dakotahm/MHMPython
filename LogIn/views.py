@@ -1,29 +1,42 @@
 from django.shortcuts import render
 from LogIn import models
+from django.contrib import auth
+from django.http import HttpResponse, HttpResponseRedirect
 
 
-def index(request):
+# TODO: validate against Users in DB, not AuthUsers
 
-        from .forms import LoginForm
-        if request.method == 'POST':
 
-            form = LoginForm(request.POST)
-            print(request)
-            print(request.POST)
-            print()
-            test = models.User.objects.all()
-            print(test)
+def login(request, template_name):
 
-            if form.is_valid():
-                print(request.POST)
-                username = request.POST.get('username', '')
-                password = request.POST.get('password', '')
+    from .forms import LoginForm
+
+    if request.method == 'POST':
+        test = models.User.objects.all()
+        print(test)
+        print(request.POST)
+
+        form = LoginForm(request.POST)
+
+        if form.is_valid():
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+
+            user = auth.authenticate(username=username, password=password)
+
+            if user is not None and user.is_active:
+                auth.login(request, user)
+                return HttpResponseRedirect("/")
 
             else:
-                print("Form not valid")
+                return HttpResponse("Invalid login. Please try again.")
 
         else:
-            form = LoginForm()
-            print("blank form")
+            print("Form not valid")
 
-        return render(request,'LogIn/Login.html')
+    else:
+        form = LoginForm()
+
+        print("blank login form")
+
+    return render(request, 'LogIn/Login.html',)
