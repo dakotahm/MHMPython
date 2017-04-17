@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}Login{% endblock %}
 {% block content %}
 
 <!-- TODO make this pretty -->
@@ -7,15 +10,15 @@
 {% endif %}
 
 <form method="post" action=''>{% csrf_token %}
-    <label for="username">Username:</label>
+    <label for="id_username">Username:</label>
     <input type="text" name="username" value="" id="username"><br>
-    <label for="password">Password:</label>
+    <label for="id_password">Password:</label>
     <input type="password" name="password" value="" id="password"><br>
 
     <input type="submit" value="Login" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-<!-- TODO: Registration -->
+<a href="{% url 'register' %}" class="">Register</a>
 
 {% endblock %}

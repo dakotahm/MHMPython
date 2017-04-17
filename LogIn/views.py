@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from LogIn import models
+from LogIn.forms import *
 from django.contrib import auth
 from django.http import HttpResponse, HttpResponseRedirect
-
-
-# TODO: validate against Users in DB, not AuthUsers
+from django.contrib.auth import logout
+from django.shortcuts import render_to_response
 
 
 def login(request, template_name):
@@ -39,4 +39,31 @@ def login(request, template_name):
 
         print("blank login form")
 
-    return render(request, 'LogIn/Login.html',)
+    return render(request, 'LogIn/login.html',)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = models.AuthUser.objects.create_user(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password1'],
+                email=form.cleaned_data['email']
+            )
+            return HttpResponseRedirect('/register/success/')
+    else:
+        form = RegistrationForm()
+
+    return render_to_response('LogIn/register.html')
+
+
+def register_success(request):
+    return render_to_response(
+        'LogIn/success.html',
+    )
+
+
+def logout_page(request):
+    logout(request)
+    return HttpResponseRedirect('/')
