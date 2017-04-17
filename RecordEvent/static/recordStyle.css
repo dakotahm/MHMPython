@@ -13,3 +13,14 @@
 .centerVert{
     padding-top: 5px;
 }
+
+.read:hover
+{
+   cursor: pointer;
+}
+.read{
+    background: white;
+}
+.disabled{
+    opacity: 0.65;
+}

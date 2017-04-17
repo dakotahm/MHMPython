@@ -1,0 +1,8 @@
+
+
+{% block dropdown %}
+    {% for measure in dropdown %}
+        <li max="{{ measure.max }}" min="{{ measure.min }}" class="{{ measure.id }}"><a  href="#">{{ measure.name }}</a></li>
+    {% endfor %}
+{#<h1>TESTING</h1>#}
+{% endblock %}
