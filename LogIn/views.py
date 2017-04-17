@@ -12,7 +12,7 @@ def login(request, template_name):
     from .forms import LoginForm
 
     if request.method == 'POST':
-        test = models.User.objects.all()
+        test = models.AuthUser.objects.all()
         print(test)
         print(request.POST)
 

@@ -1,17 +1,21 @@
 from django.db import models
 
 
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    username = models.CharField(unique=True, max_length=64)
-    password = models.CharField(max_length=64)
-    last_ip = models.CharField(max_length=64, blank=True, null=True)
-    last_access = models.DateTimeField(blank=True, null=True)
-    session_token = models.CharField(max_length=100, blank=True, null=True)
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
 
     def __str__(self):
         return self.username;
 
     class Meta:
         managed = False
-        db_table = 'users'
+        db_table = 'auth_user'
