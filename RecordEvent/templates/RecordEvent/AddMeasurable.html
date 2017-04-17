@@ -9,7 +9,7 @@
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span id="dropdownTitle" class="" max="" min="">Meausurable</span>
+    <span id="dropdownTitle" class="" max="" min="">Type</span>
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -23,17 +23,17 @@
 
     <div class="inline padding row">
       <div class="col-lg-1"> <p class="">Name:</p></div>
-  		<div class="col-lg-5"><input id="locationText" name="name" value="" type="text" placeholder="text input" class="form-control"></div>
+  		<div class="col-lg-5"><input id="id_NameText" name="name" value="" type="text" placeholder="text input" class="form-control"></div>
   </div>
 
     <div class=" inline padding row " >
    <div class="col-lg-1"><p class="centerVert" >Max:</p></div>
-     <div class="col-lg-5"> <input id="id_valueText"  type="number" name="max" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
+     <div class="col-lg-5"> <input id="id_max"  type="number" name="max" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
   </div>
 
      <div class=" inline padding row " >
    <div class="col-lg-1"><p class="centerVert" >Min:</p></div>
-     <div class="col-lg-5"> <input id="id_valueText"  type="number" name="min" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
+     <div class="col-lg-5"> <input id="id_min"  type="number" name="min" value="value" placeholder="text input" max="" min="" step="1" class="form-control"/></div>
   </div>
 
 
@@ -46,6 +46,10 @@
     </div>
 
 </form>
+<script>
+    document.getElementById("id_max").value=100;
+    document.getElementById("id_min").value=0;
+</script>
 
 
 </div>

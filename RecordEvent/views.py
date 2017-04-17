@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from RecordEvent import  models
 from datetime import datetime,date
+import json
 
 def index(request):
     from .forms import LogForm
@@ -11,7 +12,7 @@ def index(request):
 
         form=LogForm(request.POST)
         # print(request)
-        # print(request.POST)
+        print(request.POST)
         # print()
 
         test=models.Entries.objects.all()
@@ -19,28 +20,18 @@ def index(request):
         print(request.POST)
         if form.is_valid():
             print(request.POST)
-            dateInput=request.POST.get('date',datetime.today().strftime('%Y-%m-%d'))
-            timeInput=request.POST.get('time', datetime.today().strftime('%H:%M:%S'))
+            dateInput=request.POST.get('date',datetime.today()).split("/")
+            timeInput=request.POST.get('time', datetime.today()).split(':')
+            finalDatetime= datetime(int(dateInput[2]),int(dateInput[0]),int(dateInput[1]),int(timeInput[0]),int(timeInput[1]))
             log=request.POST.get('log', '')
             location=request.POST.get('location', '')
             value=request.POST.get('value', -1)
             measureID=request.POST.get('measureId', '-1')
 
-            # if dateInput.isspace() and timeInput.isspace():
-            #     theTime=datetime.now()
-            # elif not dateInput.isspace() and not timeInput.isspace():
-            #     theTime=datetime.strptime(dateInput+' '+timeInput, "%m/%d/%Y %I:%M:%S %p")
-            # elif not dateInput.isspace() and  timeInput.isspace():
-            #     theTime=datetime.strptime(dateInput+' '+timeInput, "%m/%d/%Y")
-            # elif dateInput.isspace() and not timeInput.isspace():
-            #     theTime=datetime.strptime(timeInput, "%I:%M:%S %p")
-           # newEntry = models.Entries(parent=measureID,timestamp=theTime,value=)
+            toJson={'log':log,'value':value,'location':location}
+            newEntry = models.Entries(parent=measureID,timestamp=finalDatetime,data=json.dumps(toJson))
 
-        # class Entries(models.Model):
-        #     id = models.BigAutoField(primary_key=True)
-        #     parent = models.BigIntegerField()
-        #     data = models.CharField(max_length=20000)
-        #     timestamp = models.DateTimeField(blank=True, null=True)
+
 
         else:
             print("Form not valid")
@@ -53,4 +44,10 @@ def index(request):
     return render(request,'RecordEvent/Record.html',{'dropdown':Measurables})
 
 def insertMeasurable(request):
+    if (request.method == 'POST'):
+        print(request.POST)
+        minInput=request.POST.get('min',0);
+        maxInput=request.POST.get('max',100)
+        nameInput=request.POST.get('name','name')
+        newMeasurable=models.Measurables(name=nameInput,max=int(maxInput),min=int(minInput),user_id=1)
     return render(request,'RecordEvent/AddMeasurable.html')

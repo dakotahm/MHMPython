@@ -2,6 +2,7 @@
 {% extends "RecordEvent/nav.html" %}
 
 {% block content %}
+
 <div class="container-fixed" contenteditable="false">
   <h1 class="">Record Event</h1>
 <form action="" method="post">
@@ -10,7 +11,7 @@
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span id="dropdownTitle" class="" max="" min="">Type</span>
+    <span id="dropdownTitle" class="" max="" min="">Measurable</span>
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -72,6 +73,21 @@
 {#    document.getElementById("DatePicker").value="Testing";#}
 {#    console.log("working");#}
 {#</script>#}
+
+<script>
+    var theDate= new Date();
+
+    var dateStr=(theDate.getMonth()+1)+'/'+theDate.getDate()+'/'+theDate.getFullYear();
+    var timeStr=theDate.getHours()+':'+theDate.getMinutes();
+    document.getElementById("DatePicker").value=dateStr;
+    document.getElementById("TimePicker").value=timeStr;
+    console.log(dateStr);
+    console.log(timeStr);
+</script>
+
+<script type='text/javascript'>
+	$('#TimePicker').timepicki({min_hour_value:0,max_hour_value:23,show_meridian:false});
+    </script>
 
 </div>
 
