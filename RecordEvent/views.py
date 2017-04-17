@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from RecordEvent import  models
 from datetime import datetime,date
+from django.contrib.auth.decorators import login_required
+from django.contrib import auth
 
+
+@login_required
 def index(request):
     from .forms import LogForm
     #hardcoded user1 for testing
@@ -52,5 +56,7 @@ def index(request):
 
     return render(request,'RecordEvent/Record.html',{'dropdown':Measurables})
 
+
+@login_required
 def insertMeasurable(request):
     return render(request,'RecordEvent/AddMeasurable.html')

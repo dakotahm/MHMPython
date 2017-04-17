@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+   <h1>MHM Login</h1>
+
+    <form method="post" action=".">{% csrf_token %}
+
+        <div class="fieldWrapper">
+
+            <label>Username:</label>
+            {{ form.username }}<br/>
+
+            <label>Password:</label>
+            {{ form.password }}<br/>
+
+        </div>
+
+        <div class="text-center" style="padding-top:10px;">
+            <input type="submit" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+
+    </form>
+
+    <div class="text-center" style="padding-top:10px;">
+        <a href="{% url 'register' %}" class="text-center">Don't have an account? Register here</a>
+    </div>
+
+    <div class="text-center" style="padding-top:25px;">
+        {% for field, error in form.errors.items %}
+            {% if field != '__all__' %}{{ field }}{% endif %}
+            {{ error | striptags }}
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}

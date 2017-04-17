@@ -5,12 +5,14 @@ from DisplayData import models
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.contrib.auth.decorators import login_required
 
 from chartit import DataPool, Chart
 
 
+@login_required
 def DisplayView(request):
-    return render(request,'DisplayData/Display.html')
+	return render(request,'DisplayData/Display.html')
 
 
 def get_data(request, *args, **kwargs):
@@ -35,6 +37,7 @@ class ChartData(APIView):
 			"default": all_parent,
 		}	
 		return Response(data)
+
 
 
 
