@@ -8,6 +8,12 @@ from django.contrib import auth
 @login_required
 def index(request):
     from .forms import LogForm
+
+    # code for current userid
+    current_user = request.user
+    print(current_user)
+    print(current_user.id)
+
     #hardcoded user1 for testing
     Measurables=[ entry for entry in models.Measurables.objects.all().filter(user_id=1)]
 
