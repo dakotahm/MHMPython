@@ -1,12 +1,40 @@
 {% extends "base.html" %}
-{% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
+{% block title %}Register{% endblock %}
+
 {% block content %}
+
+<div class="text-center">
+   <h1>MHM Register</h1>
+
     <form method="post" action=".">{% csrf_token %}
-        <table border="0">
-            {{ form.as_table }}
-        </table>
-        <input type="submit" value="Register" />
+
+            <div class="fieldWrapper">
+
+                <label>Username:</label>
+                {{ form.username }}<br/>
+
+                <label>Password:</label>
+                {{ form.password1 }}<br/>
+
+                <label>Confirm Password:</label>
+                {{ form.password2 }}<br/>
+
+            </div>
+
+        <div class="text-center" style="padding-top:10px;">
+            <input type="submit" value="Register" />
+        </div>
     </form>
-    <a href="/">Login</a>
+
+    <div class="text-center" style="padding-top:10px;">
+        <a href="/">Already have an account? Login</a>
+    </div>
+
+    <div class="text-center" style="padding-top:25px;">
+        {% for field, error in form.errors.items %}
+            {{ error | striptags }} <br/>
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

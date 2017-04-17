@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class LoginForm(forms.Form):
-    usernameText = forms.CharField(25)
-    passwordText = forms.CharField(25)
+    username = forms.CharField(25)
+    password = forms.CharField(25)
 
     def is_valid(self):
         return True
@@ -13,11 +13,11 @@ class LoginForm(forms.Form):
 
 class RegistrationForm(forms.Form):
     username = forms.RegexField(regex=r'^\w+$', widget=forms.TextInput(attrs=dict(required=True, max_length=30)),
-                                label=_("Username"), error_messages={
+                                label=_("username"), error_messages={
             'invalid': _("This value must contain only letters, numbers and underscores.")})
     email = forms.EmailField(widget=forms.TextInput(attrs=dict(required=True, max_length=30)), label=_("Email address"))
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("Password"))
+        widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)), label=_("password"))
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs=dict(required=True, max_length=30, render_value=False)),
         label=_("Password (again)"))

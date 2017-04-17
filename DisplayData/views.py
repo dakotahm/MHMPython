@@ -12,7 +12,7 @@ from chartit import DataPool, Chart
 
 @login_required
 def DisplayView(request):
-    return render(request,'DisplayData/Display.html')
+	return render(request,'DisplayData/Display.html')
 
 
 def get_data(request, *args, **kwargs):

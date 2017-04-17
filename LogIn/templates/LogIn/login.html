@@ -1,24 +1,42 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
-{% block head %}Login{% endblock %}
+
 {% block content %}
 
-<!-- TODO make this pretty -->
+<div class="text-center">
+   <h1>MHM Login</h1>
 
-{% if form.errors %}
-    <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    <form method="post" action=".">{% csrf_token %}
 
-<form method="post" action=''>{% csrf_token %}
-    <label for="id_username">Username:</label>
-    <input type="text" name="username" value="" id="username"><br>
-    <label for="id_password">Password:</label>
-    <input type="password" name="password" value="" id="password"><br>
+        <div class="fieldWrapper">
 
-    <input type="submit" value="Login" />
-    <input type="hidden" name="next" value="{{ next }}" />
-</form>
+            <label>Username:</label>
+            {{ form.username }}<br/>
 
-<a href="{% url 'register' %}" class="">Register</a>
+            <label>Password:</label>
+            {{ form.password }}<br/>
+
+        </div>
+
+        <div class="text-center" style="padding-top:10px;">
+            <input type="submit" value="Login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </div>
+
+    </form>
+
+    <div class="text-center" style="padding-top:10px;">
+        <a href="{% url 'register' %}" class="text-center">Don't have an account? Register here</a>
+    </div>
+
+    <div class="text-center" style="padding-top:25px;">
+        {% for field, error in form.errors.items %}
+            {% if field != '__all__' %}{{ field }}{% endif %}
+            {{ error | striptags }}
+        {% endfor %}
+    </div>
+
+</div>
+
 
 {% endblock %}

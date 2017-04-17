@@ -7,7 +7,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render_to_response
 
 
-def login(request, template_name):
+def login(request):
 
     from .forms import LoginForm
 
@@ -29,7 +29,7 @@ def login(request, template_name):
                 return HttpResponseRedirect("/")
 
             else:
-                return HttpResponse("Invalid login. Please try again.")
+                return HttpResponseRedirect("/")
 
         else:
             print("Form not valid")
@@ -51,14 +51,14 @@ def register(request):
                 password=form.cleaned_data['password1'],
                 email=form.cleaned_data['email']
             )
-            return HttpResponseRedirect('/register/success/')
+            return HttpResponseRedirect('LogIn/success.html')
     else:
         form = RegistrationForm()
 
     return render_to_response('LogIn/register.html')
 
 
-def register_success(request):
+def register_success(request, template_name):
     return render_to_response(
         'LogIn/success.html',
     )
