@@ -1,0 +1,10 @@
+.download-header{
+    border-bottom: 3px ridge #999999;
+}
+.padded{
+    padding-bottom: 30px;
+}
+
+.download-body{
+    border-bottom: 1px solid #999999;
+}

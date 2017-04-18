@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from TreatmentAid import  models
 from django.db.models import Q
+import json
 
 
 @login_required
@@ -14,5 +15,11 @@ def AidView(request):
     print(current_user.id)
 
     Downloadables = [down for down in models.Treatmentdownloads.objects.all().filter(Q(userfk=current_user.id) | Q(global_field=1))]
+
+    if(request.method=='GET' and request.is_ajax()):
+        #puts all the get parameters in a list
+        #for some reason the key 'url' was not working
+        theURL=[request.GET[key] for key in request.GET][0]
+
 
     return render(request,'TreatmentAid/Aid.html',{'download':Downloadables})
