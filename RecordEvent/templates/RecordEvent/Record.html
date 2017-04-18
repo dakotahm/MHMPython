@@ -1,6 +1,6 @@
 
 {% extends "RecordEvent/nav.html" %}
-
+{% load staticfiles %}
 {% block content %}
 
 <div class="container-fixed" contenteditable="false">
@@ -90,5 +90,5 @@
     </script>
 
 </div>
-
+<script src="{% static 'scripts/RecordEntryScript.js' %}"></script>
 {% endblock %}

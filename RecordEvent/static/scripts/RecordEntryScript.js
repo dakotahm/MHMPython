@@ -77,23 +77,10 @@ $('#id_valueText').on('input', function() {
 });
 });
 
-$("document").ready(function () {
-$('#id_NameText').on('input', function() {
-     if (document.getElementById("measurable").value != -1 && $('#id_NameText').val().length>0) {
-           //console.log("Enter the value of asindapinsd");
-           $("#submitDisabled").removeAttr('disabled');
-           $("#submitDisabled").attr('class','pull-right');
-     }else{
-           $("#submitDisabled").attr('disabled','disabled');
-           $("#submitDisabled").attr('class','pull-right disabled')
 
-     }
-       // console.log( document.getElementById("measurable").value);
-});
-});
 
-("document").ready(function() {
-    $('.dropdown-menu li').on('click', function () {
-        console.log("hey")
-    });
-});
+// ("document").ready(function() {
+//     $('.dropdown-menu li').on('click', function () {
+//         console.log("hey")
+//     });
+// });

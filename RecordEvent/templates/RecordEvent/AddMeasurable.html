@@ -1,6 +1,7 @@
 {% extends "RecordEvent/nav.html" %}
-
+{% load staticfiles %}
 {% block content %}
+<script src="{% static 'scripts/addMeasurable script.js' %}"></script>
 <div class="container-fixed" contenteditable="false">
   <h1 class="">Record Event</h1>
 <form action="" method="post">
@@ -9,10 +10,10 @@
 <div class="row">
   <div class="dropdown padding col-lg-6">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    <span id="dropdownTitle" class="" max="" min="">Type</span>
+    <span id="dropdownTitle" class="" max="" min="">Value</span>
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <ul class="dropdown-menu typeSelect" aria-labelledby="dropdownMenu1">
       <li type="value"><a  href="#">Value</a></li>
       <li type="boolean"><a  href="#">Boolean</a></li>
   </ul>
@@ -38,7 +39,7 @@
 
 
 
-    <input id="measurable" type="text" style="display: none" value="-1" name="measureId"/>
+    <input id="measurable" type="text" style="display: none" value="value" name="measureId"/>
 
 
     <div class="inline padding row">
