@@ -10,4 +10,4 @@ class Treatmentdownloads(models.Model):
 
     class Meta:
         managed = False
-        db_table =
+        db_table = 'TreatmentDownloads'
