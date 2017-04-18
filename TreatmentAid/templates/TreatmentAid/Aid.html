@@ -1,5 +1,19 @@
 {% extends "RecordEvent/nav.html" %}
 
 {% block content %}
-<h1>Edit HTML between block tags </h1>
+<h1>Downloads </h1>
+{% for down in download %}
+  <div class="row inline">
+    <div class="col-lg-4"><p class="col-lg-4">
+        Filename: {{ down.filename }}
+    </p></div>
+      <div class="col-lg-4">
+    <p class="col-lg-4">
+      Description: {{down.description}}
+    </p></div>
+      <div class="col-lg-4">
+    <button onclick="location.href='{{ down.url }}'" class="col-lg-4" type="button">
+        Download </button></div>
+  </div>
+{% endfor %}
 {% endblock %}
