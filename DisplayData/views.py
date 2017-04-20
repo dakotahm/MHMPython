@@ -31,9 +31,9 @@ class ChartData(APIView):
 	permission_classes = []
 
 	def get(self, request, format=None):
-		all_entries = models.Entries.objects.all().filter(parent=2)
+		all_entries = models.Entries.objects.all().filter(parent=2) #change to input from drop down
 		all_id = models.Entries.objects.all().values_list('id', flat=True)
-		all_measurables = models.Measurables.objects.all().filter(user_id=1)
+		all_measurables = models.Measurables.objects.all().filter(user_id=1) #change to current user
 		
 		all_ids = [m.id for m in all_measurables] #use this to make drop down
 		all_times = [m.timestamp for m in all_entries]
