@@ -28,14 +28,14 @@ class ChartData(APIView):
 	def get(self, request, format=None):
 		all_entries = models.Entries.objects.all()
 		all_id = models.Entries.objects.all().values_list('id', flat=True)
-		all_measurables = models.Measurables.objects.all.filter(user_id=request.user.id, flat=True)
+		all_measurables = models.Measurables.objects.all().filter(user_id=request.user.id)
 		all_parent = models.Entries.objects.all().values_list('parent', flat=True)
 		labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]
 		default_items = [12, 11, 17, 12, 12, 2]
 		data = {
-			#"labels": all_measurables,
-			"labels": all_id,
-			"default": all_parent,
+			"labels": all_measurables,
+			#"labels": all_id,
+			#"default": all_parent,
 		}	
 		return Response(data)
 
