@@ -6,6 +6,9 @@
 
 
 {% block content %}
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    {% include 'RecordEvent/includes/EntryDropdown.html' %}
+</ul>
 
 <div class='row'>
 	<div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
@@ -28,7 +31,7 @@ $.ajax({
 		console.log(data)
 		var ctx = document.getElementById("myChart");
 		var myChart = new Chart(ctx, {
-		    type: 'bar',
+		    type: 'line',
 		    data: {
 		        labels: defaultLabels,
 		        datasets: [{

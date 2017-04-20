@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from DisplayData import models
 
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
@@ -9,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from chartit import DataPool, Chart
 
 import json
+
+from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 
 
 @login_required
@@ -32,7 +35,7 @@ class ChartData(APIView):
 		all_id = models.Entries.objects.all().values_list('id', flat=True)
 		all_measurables = models.Measurables.objects.all().filter(user_id=1)
 		
-		all_ids = [m.id for m in all_measurables]
+		all_ids = [m.id for m in all_measurables] #use this to make drop down
 		all_times = [m.timestamp for m in all_entries]
 
 		all_data = []
@@ -42,12 +45,7 @@ class ChartData(APIView):
 			value = json_data['value']
 			all_data.append(value)
 
-		#all_data = [m.data for m in all_entries]
-
-
-		all_parent = models.Entries.objects.all().values_list('parent', flat=True)
-		labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]
-		default_items = [12, 11, 17, 12, 12, 2]
+		
 		data = {
 			"labels": all_times,
 			"default": all_data,
