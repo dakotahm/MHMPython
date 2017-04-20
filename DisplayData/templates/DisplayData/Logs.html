@@ -1,0 +1,41 @@
+{% extends "RecordEvent/nav.html" %}
+{% load staticfiles %}
+{% block content %}
+        <link rel="stylesheet" href="{% static 'TreatmentAid/css/Downloadscss.css' %}"/>
+
+    <div class="padded">
+        <div class="download-header">
+            <h3>Logs</h3>
+            <div class="row inline download-header">
+                <div class="col-lg-6">
+                     <div class="dropdown padding col-lg-6">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span id="dropdownTitle" class="">Measurable</span>
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            {% include 'RecordEvent/includes/EntryDropdown.html' %}
+                          </ul>
+                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="dropdown padding col-lg-6">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span id="dropdownTitle" class="" max="" min="">Time Span</span>
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li><a href="#">Day</a></li>
+                          <li><a href="#">Week</a></li>
+                          <li><a href="#">Month</a></li>
+                          <li><a href="#">3 Months</a></li>
+                          <li><a href="#">6 Month</a></li>
+                          <li><a href="#">Year</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

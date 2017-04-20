@@ -53,6 +53,11 @@ class ChartData(APIView):
 		}	
 		return Response(data)
 
+@login_required
+def LogDisplay(request):
+    measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+
+    return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})
 
 
 
