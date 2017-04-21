@@ -28,8 +28,9 @@
           {{down.description}}
         </p></div>
           <div class="col-lg-4">
-        <button url="{{ down.url }}" class="download pull-right" type="button">
-            Download </button></div>
+              <a href="{{ down.url }}" download>
+       <button class="col-lg-4" type="button">
+            Download </button></a></div>
       </div>
     </div>
     <script src="{% static 'TreatmentAid/scripts/Download.js' %}"></script>
