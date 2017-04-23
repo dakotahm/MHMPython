@@ -6,9 +6,10 @@
 
 
 {% block content %}
-<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    {% include 'RecordEvent/includes/EntryDropdown.html' %}
-</ul>
+
+<div class="row">
+    {% include 'DisplayData/Logs.html' %}
+</div>
 
 <div class='row'>
 	<div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
