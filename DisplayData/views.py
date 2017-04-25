@@ -35,7 +35,7 @@ class ChartData(APIView):
 
     def get(self, request, format=None):
 
-        display_id = request.POST.get("textfield")
+        display_id = self.request.POST.get("textfield")
         display_id = int(display_id)
 
         print(display_id)
