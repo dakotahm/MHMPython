@@ -28,19 +28,6 @@ def get_data(request, *args, **kwargs):
 
 
 
-def index(request):
-    return render(request, 'form.html')
-
-display_index = 0
-
-def search(request):
-    if request.method == 'POST':
-        search_id = request.POST['textfield']
-        print(search_id)
-        display_index = search_id
-    else:
-        return render(request, 'form.html')   
-
 
 class ChartData(APIView):
     authentication_classes = []
@@ -48,8 +35,10 @@ class ChartData(APIView):
 
     def get(self, request, format=None):
 
-        display_id = request.POST.get("textfield", "")
+        display_id = request.POST.get("textfield")
         display_id = int(display_id)
+
+        print(display_id)
 
         all_entries = models.Entries.objects.all().filter(parent=display_id) #change to input from drop down or change to 2
         all_id = models.Entries.objects.all().values_list('id', flat=True)
