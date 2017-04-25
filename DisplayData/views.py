@@ -33,10 +33,19 @@ class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
 
+    display_id = 0
+
+    def post(self, request, format=None):
+        display_id = self.request.POST.get("textfield")
+
+        try:
+           display_id = int(display_id) 
+        except ValueError: 
+           display_id = 2
+
     def get(self, request, format=None):
 
         display_id = self.request.POST.get("textfield")
-        display_id = int(display_id)
 
         print(display_id)
 
