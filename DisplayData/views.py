@@ -46,11 +46,12 @@ class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
 
-
-
     def get(self, request, format=None):
 
-        all_entries = models.Entries.objects.all().filter(parent=display_index) #change to input from drop down or change to 2
+        display_id = request.POST.get("textfield", "")
+        display_id = int(display_id)
+
+        all_entries = models.Entries.objects.all().filter(parent=display_id) #change to input from drop down or change to 2
         all_id = models.Entries.objects.all().values_list('id', flat=True)
         all_measurables = models.Measurables.objects.all().filter(user_id=request.user.id) #change to current user
         
