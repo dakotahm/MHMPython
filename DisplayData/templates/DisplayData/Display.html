@@ -8,30 +8,6 @@
 {% block content %}
 
 <div class="row">
-    <div class="padded">
-        <div class="download-header">
-            <h3>Data</h3>
-            <div class="row inline download-header">
-                <div class="col-lg-6">
-                	<!--
-                     <div class="dropdown padding col-lg-6">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <span id="dropdownTitle" class="">Measurable</span>
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            {% include 'RecordEvent/includes/EntryDropdown.html' %}
-                          </ul>
-                     </div>
-                     //-->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="row">
 	<h4>Enter measurable number:</h4>
 	<form method="POST">
 		{% csrf_token %}
@@ -39,6 +15,25 @@
 		<button type="submit">Submit</button>
 	</form>
 </div>
+
+<script>
+	$("textfield").submit(function(e) {
+
+	    var url = "display/api/chart/data/"; // the script where you handle the form input.
+
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: $("textfield").serialize(), // serializes the form's elements.
+	           success: function(data)
+	           {
+	               alert(data); // show response from the php script.
+	           }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
+</script>
 
 
 <div class='padded'>

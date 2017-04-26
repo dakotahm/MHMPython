@@ -11,6 +11,7 @@ from chartit import DataPool, Chart
 
 import json
 
+from .forms import SubmitIDForm
 from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 
 
@@ -33,7 +34,7 @@ class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
 
-
+    
     def post(self, request, format=None):
         display_id = self.request.POST.get("textfield")
 
@@ -45,6 +46,7 @@ class ChartData(APIView):
            display_id = 2
 
         return display_id
+    
 
     def get(self, request, format=None):
 
@@ -54,7 +56,8 @@ class ChartData(APIView):
         print('value of display_id ')
         print(display_id)
 
-        all_entries = models.Entries.objects.all().filter(parent=2) #change to input from drop down or change to 2
+        #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
+        all_entries = models.Entries.objects.all().filter(parent=display_id)
         all_id = models.Entries.objects.all().values_list('id', flat=True)
         all_measurables = models.Measurables.objects.all().filter(user_id=request.user.id) #change to current user
         
