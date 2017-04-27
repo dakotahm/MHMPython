@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from DisplayData import LogFunctions
 from chartit import DataPool, Chart
+from rest_framework.permissions import IsAuthenticated
 
 import json
 
@@ -20,6 +21,7 @@ def DisplayView(request):
 
 
 def get_data(request, *args, **kwargs):
+
 
     print(request.user.id)
         
@@ -63,7 +65,7 @@ def get_data(request, *args, **kwargs):
 
 class ChartData(APIView):
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
 
 
     def get(self, request, format=None):
