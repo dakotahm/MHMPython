@@ -19,7 +19,7 @@ from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 def DisplayView(request):
     return render(request,'DisplayData/Display.html')
 
-
+#using this now
 def get_data(request, *args, **kwargs):
 
 
@@ -27,22 +27,23 @@ def get_data(request, *args, **kwargs):
         
     all_measurables= models.Measurables.objects.all().filter(user_id=request.user.id)
 
-    
+    #debug
     all_ids = []
     for m in all_measurables:
         all_ids.append(m.id)
     print(all_ids)
+    #end_debug
     
+    all_entries = models.Entries.objects.all().filter(parent=4) #user input goes here
 
-    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-    all_entries = models.Entries.objects.all().filter(parent=4)
-
+    #debug
     all_ents = []
     for m in all_entries:
         all_ents.append(m.id)
     print(all_ents)
+    #end_debug
     
-    #all_times = [m.timestamp for m in all_entries]
+
     all_times = []
     all_data = []
 
@@ -62,7 +63,7 @@ def get_data(request, *args, **kwargs):
     return JsonResponse(data)
 
 
-
+#ignore the following
 class ChartData(APIView):
     authentication_classes = []
     permission_classes = [IsAuthenticated, ]
@@ -102,15 +103,6 @@ class ChartData(APIView):
             value= json_data['value']
             all_data.append(value)
             all_times.append(row.timestamp)
-        
-
-        '''
-        for m in all_entries:
-            data = m.data
-            json_data = json.loads(data)
-            value = json_data['value']
-            all_data.append(value)
-        '''
         
         data = {
             "labels": all_times,
