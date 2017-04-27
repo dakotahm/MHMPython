@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from DisplayData import LogFunctions
+from DisplayData import GraphFunctions
 from chartit import DataPool, Chart
 from rest_framework.permissions import IsAuthenticated
 import random
@@ -23,9 +24,6 @@ def DisplayView(request):
 #using this now
 def get_data(request, *args, **kwargs):
 
-    mId = 0;
-    if (request.method == 'POST' and request.is_ajax()):
-        mID = int(request.POST.get('measuraleId'))
 
     print(request.user.id)
         
@@ -152,16 +150,16 @@ def LogDisplay(request):
 
 
 @login_required
-def DropdownDisplay(request):
+def DropdownDisplay(request, *args, **kwargs):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
     if (request.method == 'POST' and request.is_ajax()):
         mID = int(request.POST.get('measuraleId'))
         timeframe=GraphFunctions.gettime(request.POST.get('timeframe'))
-        data = GraphFunctions.getRows(mID, timeframe)
+        data = GraphFunctions.getData(mID, timeframe)
 
         print(data)
 
-        return Response(data)
+        return JsonResponse(data)
 
 
     return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
