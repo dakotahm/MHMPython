@@ -21,35 +21,53 @@ def DisplayView(request):
 
 
 def get_data(request, *args, **kwargs):
+
+    all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
+    all_entries = models.Entries.objects.all().filter(parent=2)
+
+    
+    all_times = [m.timestamp for m in all_entries]
+
+    all_data = []
+    for m in all_entries:
+        data = m.data
+        json_data = json.loads(data)
+        value = json_data['value']
+        all_data.append(value)
+
+    data = {
+        "labels": all_times,
+        "default": all_data,
+    }   
+
+    return JsonResponse(data)
+    '''
     data = {
         "sales": 100,
         "customers": 10,
     }
     return JsonResponse(data)
-
-
+    '''
 
 
 class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
+
+    got_data = get_data(request)
+    print(got_data)
     
     def get(self, request, format=None):
 
         all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
 
-        display_id = 2;
+        
 
-        got_data = request.POST
-
-        print(got_data)
-
-
-        print('value of display_id ')
-        print(display_id)
+    
 
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-        all_entries = models.Entries.objects.all().filter(parent=display_id)
+        all_entries = models.Entries.objects.all().filter(parent=2)
         all_id = models.Entries.objects.all().values_list('id', flat=True)
         
         
@@ -83,6 +101,7 @@ def LogDisplay(request):
 
     return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})
 
+
 @login_required
 def DropdownDisplay(request):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
@@ -92,6 +111,7 @@ def DropdownDisplay(request):
         print(request.POST)
 
     return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
+
 
 
 
