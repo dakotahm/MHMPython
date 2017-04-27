@@ -60,20 +60,27 @@ class ChartData(APIView):
 
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
         all_entries = models.Entries.objects.all().filter(parent=2)
-        all_id = models.Entries.objects.all().values_list('id', flat=True)
         
-        
-        all_ids = [m.id for m in all_measurables] #use this to make drop down
-        
-        all_times = [m.timestamp for m in all_entries]
-
+        #all_times = [m.timestamp for m in all_entries]
+        all_times =[]
         all_data = []
+
+        
+        for row in all_entries:
+            data = row.data
+            json_data= json.loads(data)
+            value= json_data['value']
+            all_data.append(value)
+            all_times.append(row.timestamp)
+        
+
+        '''
         for m in all_entries:
             data = m.data
             json_data = json.loads(data)
             value = json_data['value']
             all_data.append(value)
-
+        '''
         
         data = {
             "labels": all_times,
