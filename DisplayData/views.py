@@ -1,12 +1,11 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.http import JsonResponse
 from DisplayData import models
-
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
-
+from DisplayData import LogFunctions
 from chartit import DataPool, Chart
 
 import json
@@ -85,8 +84,11 @@ def LogDisplay(request):
     if (request.method == 'POST' and request.is_ajax()):
 
        #data can be accessed from this post request and processed here
-        print(request.POST)
-
+        mID=int(request.POST.get('measuraleId'))
+        timeframe=LogFunctions.gettime(request.POST.get('timeframe'))
+        onSuccess={'html':LogFunctions.buildHTML(mID,timeframe)}
+        print(onSuccess)
+        return HttpResponse(json.dumps(onSuccess), content_type="application/json")
 
 
     return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})

@@ -1,10 +1,5 @@
-//sets head of dropdown to first selected value
-function updatedrop(){
-    var input =$('#measurable-dropdown li:first').children().first().text();
-    var id=$('#measurable-dropdown li:first').attr('class');
-    $('#MeasurableDropdownTitle').text(input);
-    $('#MeasurableDropdownTitle').attr('class',id);
-}
+
+
 
 //This comes from stackoverflow http://stackoverflow.com/questions/24496751/django-403-error-on-ajax-view-with-csrf-token
 //very important it gets the cookie containing the security token
@@ -25,6 +20,30 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
+//sets head of dropdown to first selected value
+function updatedrop(){
+    var input =$('#measurable-dropdown li:first').children().first().text();
+    var id=$('#measurable-dropdown li:first').attr('class');
+    $('#MeasurableDropdownTitle').text(input);
+    $('#MeasurableDropdownTitle').attr('class',id);
+
+      $.ajax({
+            type:'POST',
+            url: '/display/logs/',
+
+            //this is the data being passed into the post in JSON format
+            data:{
+                'measuraleId': $('#MeasurableDropdownTitle').attr('class'),
+                'timeframe':$('#TimeDropdownTitle').text(),
+                csrfmiddlewaretoken: csrftoken
+            },
+            datatype:'json',
+            success:function (data) {
+                //replaces the html in container with the results from the query
+                $('#log-container').html(data.html);
+            }
+        })
+}
 
 
 //everything in here calls when the document loads
@@ -56,11 +75,10 @@ $("document").ready(function() {
             },
             datatype:'json',
             success:function (data) {
-                console.log("success");
+                //replaces the html in container with the results from the query
+                $('#log-container').html(data.html);
             }
         })
-
-
     });
 
     //when the document loads the logs move to the first available measurable
