@@ -54,27 +54,9 @@ class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
 
-    def DropdownDisplay(request):
-        measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
-        if (request.method == 'POST' and request.is_ajax()):
-            mID = int(request.POST.get('measuraleId'))
-            timeframe=GrapgFunctions.gettime(request.POST.get('timeframe'))
-            data = GraphFunctions.getRows(mID, timeframe)
-
-            print(data)
-
-            return Response(data)
-
-        return render(request, 'DisplayData/Dropdown.html',{'dropdown':measurables})
-
     def get(self, request, format=None):
-
+        
         all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
-
-        
-
-        
-    
 
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
         all_entries = models.Entries.objects.all().filter(parent=2)
@@ -99,6 +81,8 @@ class ChartData(APIView):
         }   
         
         return Response(data)
+        
+
 
 
 @login_required
@@ -110,19 +94,19 @@ def LogDisplay(request):
         mID=int(request.POST.get('measuraleId'))
         timeframe=LogFunctions.gettime(request.POST.get('timeframe'))
         onSuccess={'html':LogFunctions.buildHTML(mID,timeframe)}
-        #print(onSuccess)
+        print(onSuccess)
         return HttpResponse(json.dumps(onSuccess), content_type="application/json")
 
 
     return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})
 
-'''
+
 @login_required
 def DropdownDisplay(request):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
     if (request.method == 'POST' and request.is_ajax()):
         mID = int(request.POST.get('measuraleId'))
-        timeframe=GrapgFunctions.gettime(request.POST.get('timeframe'))
+        timeframe=GraphFunctions.gettime(request.POST.get('timeframe'))
         data = GraphFunctions.getRows(mID, timeframe)
 
         print(data)
@@ -131,7 +115,7 @@ def DropdownDisplay(request):
 
 
     return render(request, 'DisplayData/Dropdown.html',{'dropdown':measurables})
-'''
+
 
 
 
