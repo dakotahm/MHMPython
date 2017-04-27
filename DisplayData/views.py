@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.contrib.auth.decorators import login_required
 from DisplayData import LogFunctions
 from chartit import DataPool, Chart
+from rest_framework.permissions import IsAuthenticated
 
 import json
 
@@ -18,51 +19,81 @@ from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 def DisplayView(request):
     return render(request,'DisplayData/Display.html')
 
-
+#using this now
 def get_data(request, *args, **kwargs):
 
-    all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
-    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-    all_entries = models.Entries.objects.all().filter(parent=2)
+
+    print(request.user.id)
+        
+    all_measurables= models.Measurables.objects.all().filter(user_id=request.user.id)
+
+    #debug
+    all_ids = []
+    for m in all_measurables:
+        all_ids.append(m.id)
+    print(all_ids)
+    #end_debug
+    
+    all_entries = models.Entries.objects.all().filter(parent=4) #user input goes here
+
+    #debug
+    all_ents = []
+    for m in all_entries:
+        all_ents.append(m.id)
+    print(all_ents)
+    #end_debug
+    
+
+    all_times = []
+    all_data = []
 
     
-    all_times = [m.timestamp for m in all_entries]
-
-    all_data = []
-    for m in all_entries:
-        data = m.data
-        json_data = json.loads(data)
-        value = json_data['value']
+    for row in all_entries:
+        data = row.data
+        json_data= json.loads(data)
+        value= json_data['value']
         all_data.append(value)
-
+        all_times.append(row.timestamp)
+    
     data = {
         "labels": all_times,
         "default": all_data,
     }   
-
+    
     return JsonResponse(data)
-    '''
-    data = {
-        "sales": 100,
-        "customers": 10,
-    }
-    return JsonResponse(data)
-    '''
 
 
+#ignore the following
 class ChartData(APIView):
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
+
 
     def get(self, request, format=None):
+
+        print(self.request.user)
         
-        all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+        all_measurables= models.Measurables.objects.all()
+
+        #print(all_measurables)
+
+        
+        all_ids = []
+        for m in all_measurables:
+            all_ids.append(m.id)
+        print(all_ids)
+        
 
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-        all_entries = models.Entries.objects.all().filter(parent=2)
+        all_entries = models.Entries.objects.all().filter(parent=4)
+
+        all_ents = []
+        for m in all_entries:
+            all_ents.append(m.id)
+        print(all_ents)
         
         #all_times = [m.timestamp for m in all_entries]
-        all_times =[]
+        all_times = []
         all_data = []
 
         
@@ -73,28 +104,26 @@ class ChartData(APIView):
             all_data.append(value)
             all_times.append(row.timestamp)
         
-
-        '''
-        for m in all_entries:
-            data = m.data
-            json_data = json.loads(data)
-            value = json_data['value']
-            all_data.append(value)
-        '''
-        
         data = {
             "labels": all_times,
             "default": all_data,
         }   
         
         return Response(data)
-        
 
 
 
 @login_required
 def LogDisplay(request):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+
+    print(request.user.id)
+
+    all_ids = []
+    for m in measurables:
+        all_ids.append(m.id)
+    print(all_ids)
+
     if (request.method == 'POST' and request.is_ajax()):
 
        #data can be accessed from this post request and processed here
@@ -121,7 +150,7 @@ def DropdownDisplay(request):
         return Response(data)
 
 
-    return render(request, 'DisplayData/Dropdown.html',{'dropdown':measurables})
+    return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
 
 
 
