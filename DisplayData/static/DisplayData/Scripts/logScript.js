@@ -83,5 +83,9 @@ $("document").ready(function() {
 
     //when the document loads the logs move to the first available measurable
     updatedrop();
+
+
+    // set Logs in navbar as active
+    document.getElementById("logs").className = "active";
 });
 
