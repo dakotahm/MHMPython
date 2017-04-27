@@ -21,48 +21,76 @@ def DisplayView(request):
 
 def get_data(request, *args, **kwargs):
 
-    all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
-    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-    all_entries = models.Entries.objects.all().filter(parent=2)
+    print(request.user.id)
+        
+    all_measurables= models.Measurables.objects.all().filter(user_id=request.user.id)
 
     
-    all_times = [m.timestamp for m in all_entries]
+    all_ids = []
+    for m in all_measurables:
+        all_ids.append(m.id)
+    print(all_ids)
+    
 
-    all_data = []
+    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
+    all_entries = models.Entries.objects.all().filter(parent=4)
+
+    all_ents = []
     for m in all_entries:
-        data = m.data
-        json_data = json.loads(data)
-        value = json_data['value']
-        all_data.append(value)
+        all_ents.append(m.id)
+    print(all_ents)
+    
+    #all_times = [m.timestamp for m in all_entries]
+    all_times = []
+    all_data = []
 
+    
+    for row in all_entries:
+        data = row.data
+        json_data= json.loads(data)
+        value= json_data['value']
+        all_data.append(value)
+        all_times.append(row.timestamp)
+    
     data = {
         "labels": all_times,
         "default": all_data,
     }   
+    
+    return JsonResponse(data)
 
-    return JsonResponse(data)
-    '''
-    data = {
-        "sales": 100,
-        "customers": 10,
-    }
-    return JsonResponse(data)
-    '''
 
 
 class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
 
+
     def get(self, request, format=None):
+
+        print(self.request.user)
         
-        all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+        all_measurables= models.Measurables.objects.all()
+
+        #print(all_measurables)
+
+        
+        all_ids = []
+        for m in all_measurables:
+            all_ids.append(m.id)
+        print(all_ids)
+        
 
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-        all_entries = models.Entries.objects.all().filter(parent=2)
+        all_entries = models.Entries.objects.all().filter(parent=4)
+
+        all_ents = []
+        for m in all_entries:
+            all_ents.append(m.id)
+        print(all_ents)
         
         #all_times = [m.timestamp for m in all_entries]
-        all_times =[]
+        all_times = []
         all_data = []
 
         
@@ -88,13 +116,20 @@ class ChartData(APIView):
         }   
         
         return Response(data)
-        
 
 
 
 @login_required
 def LogDisplay(request):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+
+    print(request.user.id)
+
+    all_ids = []
+    for m in measurables:
+        all_ids.append(m.id)
+    print(all_ids)
+
     if (request.method == 'POST' and request.is_ajax()):
 
        #data can be accessed from this post request and processed here
@@ -121,7 +156,7 @@ def DropdownDisplay(request):
         return Response(data)
 
 
-    return render(request, 'DisplayData/Dropdown.html',{'dropdown':measurables})
+    return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
 
 
 
