@@ -6,11 +6,37 @@
 
 
 {% block content %}
-<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    {% include 'RecordEvent/includes/EntryDropdown.html' %}
-</ul>
 
-<div class='row'>
+<div class="row">
+	<h4>Enter measurable number:</h4>
+	<form method="POST">
+		{% csrf_token %}
+		<input type="number" name="textfield">
+		<button type="submit">Submit</button>
+	</form>
+</div>
+
+<script>
+	$("textfield").submit(function(e) {
+
+	    var url = "display/api/chart/data/"; // the script where you handle the form input.
+
+	    $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: $("textfield").serialize(), // serializes the form's elements.
+	           success: function(data)
+	           {
+	               alert(data); // show response from the php script.
+	           }
+	         });
+
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+	});
+</script>
+
+
+<div class='padded'>
 	<div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
 		<h1>Graph Data</h1>
 		<canvas id="myChart" width="400" height="400"></canvas>
