@@ -40,6 +40,10 @@ class ChartData(APIView):
 
         display_id = 2;
 
+        got_data = request.POST
+
+        print(got_data)
+
 
         print('value of display_id ')
         print(display_id)
@@ -86,8 +90,6 @@ def DropdownDisplay(request):
 
        #data can be accessed from this post request and processed here
         print(request.POST)
-
-
 
     return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
 
