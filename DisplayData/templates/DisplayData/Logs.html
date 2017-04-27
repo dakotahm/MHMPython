@@ -8,29 +8,29 @@
             <h3>Logs</h3>
             <div class="row inline download-header">
                 <div class="col-lg-6">
-                     <div class="dropdown padding col-lg-6">
+                     <div class="dropdown padding pull-right">
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span id="dropdownTitle" class="">Measurable</span>
                             <span class="caret"></span>
                           </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <ul id="measurable-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             {% include 'RecordEvent/includes/EntryDropdown.html' %}
                           </ul>
                      </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="dropdown padding col-lg-6">
+                    <div class="dropdown padding">
                       <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span id="dropdownTitle" class="" max="" min="">Time Span</span>
+                        <span id="dropdownTitle" class="" max="" min="">Month</span>
                         <span class="caret"></span>
                       </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                          <li><a href="#">Day</a></li>
-                          <li><a href="#">Week</a></li>
-                          <li><a href="#">Month</a></li>
-                          <li><a href="#">3 Months</a></li>
-                          <li><a href="#">6 Month</a></li>
-                          <li><a href="#">Year</a></li>
+                      <ul id="time-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                          <li class="Day"><a  href="#">Day</a></li>
+                          <li class="Week"><a href="#">Week</a></li>
+                          <li class="Month"><a href="#">Month</a></li>
+                          <li class="3 Months"><a href="#">3 Months</a></li>
+                          <li class="6 Months"><a href="#">6 Month</a></li>
+                          <li class="Year"><a href="#">Year</a></li>
                       </ul>
                     </div>
                 </div>
@@ -38,4 +38,20 @@
         </div>
     </div>
 
+    <div id="log-container" class="container">
+        <div class="padded">
+            <div class="download-body">
+                <div class="row inline" style="padding-bottom: 10px">
+                    <div class="col-lg-6">
+                        <p>Time:<span class="value">12/12/2017</span> </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <p>Value: <span class="value">5</span></p>
+                    </div>
+                </div>
+                <p class="log">this is a log</p>
+            </div>
+        </div>
+    </div>
+<script src="{% static 'DisplayData/Scripts/logScript.js' %}"></script>
 {% endblock %}
