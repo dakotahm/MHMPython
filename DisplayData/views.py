@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from DisplayData import LogFunctions
 from chartit import DataPool, Chart
 from rest_framework.permissions import IsAuthenticated
+import random
 
 import json
 
@@ -33,8 +34,10 @@ def get_data(request, *args, **kwargs):
         all_ids.append(m.id)
     print(all_ids)
     #end_debug
+
+    display_id = random.choice(all_ids)
     
-    all_entries = models.Entries.objects.all().filter(parent=4) #user input goes here
+    all_entries = models.Entries.objects.all().filter(parent=display_id) #user input goes here
 
     #debug
     all_ents = []
