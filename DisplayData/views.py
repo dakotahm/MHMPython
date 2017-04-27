@@ -11,7 +11,7 @@ from chartit import DataPool, Chart
 
 import json
 
-from .forms import SubmitIDForm
+#from .forms import SubmitIDForm
 from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 
 
@@ -82,6 +82,12 @@ class ChartData(APIView):
 @login_required
 def LogDisplay(request):
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    if (request.method == 'POST' and request.is_ajax()):
+
+       #data can be accessed from this post request and processed here
+        print(request.POST)
+
+
 
     return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})
 
