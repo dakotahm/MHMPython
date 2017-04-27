@@ -33,24 +33,15 @@ def get_data(request, *args, **kwargs):
 class ChartData(APIView):
     authentication_classes = []
     permission_classes = []
-
     
-    def post(self, request, format=None):
-        display_id = self.request.POST.get("textfield")
-
-        print(request.data)
-
-        try:
-           display_id = int(display_id) 
-        except ValueError: 
-           display_id = 2
-
-        return display_id
-    
-
     def get(self, request, format=None):
 
-        display_id = self.request.POST.get("textfield")
+        all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+
+        display_id = 2;
+        
+        if (request.method == 'POST' and request.is_ajax()):
+            print(request.POST)
 
 
         print('value of display_id ')
@@ -59,7 +50,7 @@ class ChartData(APIView):
         #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
         all_entries = models.Entries.objects.all().filter(parent=display_id)
         all_id = models.Entries.objects.all().values_list('id', flat=True)
-        all_measurables = models.Measurables.objects.all().filter(user_id=request.user.id) #change to current user
+        
         
         all_ids = [m.id for m in all_measurables] #use this to make drop down
         
