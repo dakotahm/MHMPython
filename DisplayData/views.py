@@ -23,6 +23,9 @@ def DisplayView(request):
 #using this now
 def get_data(request, *args, **kwargs):
 
+    mId = 0;
+    if (request.method == 'POST' and request.is_ajax()):
+        mID = int(request.POST.get('measuraleId'))
 
     print(request.user.id)
         
@@ -31,7 +34,7 @@ def get_data(request, *args, **kwargs):
     #debug
     all_ids = []
     for m in all_measurables:
-        all_ids.append(m.id)
+        all_ids.append(m.id) #gets ids of all the measurables for current user
     print(all_ids)
     #end_debug
 
@@ -40,7 +43,7 @@ def get_data(request, *args, **kwargs):
 
     for m in  all_measurables:
         if m.id == display_id:
-            display_name = m.name
+            display_name = m.name #passed into legend for graph
 
     print(display_name)
     
@@ -49,7 +52,7 @@ def get_data(request, *args, **kwargs):
     #debug
     all_ents = []
     for m in all_entries:
-        all_ents.append(m.id)
+        all_ents.append(m.id) #gets all the entries for the measurable
     print(all_ents)
     #end_debug
     
