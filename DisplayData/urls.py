@@ -11,5 +11,5 @@ urlpatterns=[
     url(r'^api/data/$', views.get_data, name='api-data'),
     url(r'^display/api/chart/data/$', views.ChartData.as_view()),
     url(r'^logs/', views.LogDisplay, name='Display-Logs'),
-    url(r'^dropdown/', views.ChartData.as_view()),
+    url(r'^graph/', views.DropdownDisplay, name='Display-Dropdown'),
 ]

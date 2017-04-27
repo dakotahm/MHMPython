@@ -39,9 +39,6 @@ class ChartData(APIView):
         all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
 
         display_id = 2;
-        
-        if (request.method == 'POST' and request.is_ajax()):
-            print(request.POST)
 
 
         print('value of display_id ')
@@ -81,6 +78,18 @@ def LogDisplay(request):
 
 
     return render(request, 'DisplayData/Logs.html',{'dropdown':measurables})
+
+@login_required
+def DropdownDisplay(request):
+    measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    if (request.method == 'POST' and request.is_ajax()):
+
+       #data can be accessed from this post request and processed here
+        print(request.POST)
+
+
+
+    return render(request, 'DisplayData/Display.html',{'dropdown':measurables})
 
 
 
