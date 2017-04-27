@@ -6,30 +6,38 @@
 <div class="text-center">
    <h1>MHM Register</h1>
 
+    <!-- Register form -->
     <form method="post" action=".">{% csrf_token %}
 
             <div class="fieldWrapper">
 
+                <!-- Username input -->
                 <label>Username:</label>
                 {{ form.username }}<br/>
 
+                <!-- Password input -->
                 <label>Password:</label>
                 {{ form.password1 }}<br/>
 
+                <!-- Confirm password input -->
                 <label>Confirm Password:</label>
                 {{ form.password2 }}<br/>
 
             </div>
 
+        <!-- Register button -->
         <div class="text-center" style="padding-top:10px;">
             <input type="submit" value="Register" />
         </div>
+
     </form>
 
+    <!-- Login link -->
     <div class="text-center" style="padding-top:10px;">
         <a href="/">Already have an account? Login</a>
     </div>
 
+    <!-- Display register errors, if any -->
     <div class="text-center" style="padding-top:25px;">
         {% for field, error in form.errors.items %}
             {{ error | striptags }} <br/>

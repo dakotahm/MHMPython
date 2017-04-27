@@ -2,6 +2,10 @@ from django.db import models
 
 
 class AuthUser(models.Model):
+    """
+    AuthUser model is used for all users. Stored in a table in MySQL database
+    
+    """
     password = models.CharField(max_length=128)
     last_login = models.DateTimeField(blank=True, null=True)
     is_superuser = models.IntegerField()
@@ -14,8 +18,17 @@ class AuthUser(models.Model):
     date_joined = models.DateTimeField()
 
     def __str__(self):
+        """
+        Method for reading this model's username attribute
+        
+        :return: 
+        """
         return self.username;
 
     class Meta:
+        """
+        Associated with auth_user table in MySQL database
+        
+        """
         managed = False
         db_table = 'auth_user'
