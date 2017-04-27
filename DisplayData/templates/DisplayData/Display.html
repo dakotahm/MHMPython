@@ -64,6 +64,7 @@ $.ajax({
 	success: function(data){
 		defaultLabels = data.labels
 		defaultData = data.default
+		defaultName = data.name
 		console.log(data)
 		var ctx = document.getElementById("myChart");
 		var myChart = new Chart(ctx, {
@@ -71,7 +72,7 @@ $.ajax({
 		    data: {
 		        labels: defaultLabels,
 		        datasets: [{
-		            label: '# Measurable',
+		            label: defaultName,
 		            data: defaultData,
 		            borderWidth: 1
 		        }]

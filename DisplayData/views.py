@@ -36,6 +36,13 @@ def get_data(request, *args, **kwargs):
     #end_debug
 
     display_id = random.choice(all_ids)
+    display_name = ''
+
+    for m in  all_measurables:
+        if m.id == display_id:
+            display_name = m.name
+
+    print(display_name)
     
     all_entries = models.Entries.objects.all().filter(parent=display_id) #user input goes here
 
@@ -61,6 +68,7 @@ def get_data(request, *args, **kwargs):
     data = {
         "labels": all_times,
         "default": all_data,
+        "name": display_name
     }   
     
     return JsonResponse(data)
