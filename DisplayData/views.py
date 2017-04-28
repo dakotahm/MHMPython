@@ -22,11 +22,6 @@ def DisplayView(request):
 
 def get_data(request, *args, **kwargs):
 
-    all_measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
-    #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
-    all_entries = models.Entries.objects.all().filter(parent=2)
-
-
 
     #Here is the measurable Id and time (in python datetime from the form!!!!!!!!!!!!!!!!!!
     print(request.GET)
@@ -35,8 +30,18 @@ def get_data(request, *args, **kwargs):
     print(mId)
     print(timeframe)
 
+    measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    all_entries = models.Entries.objects.all().filter(parent=mId).filter(timestamp__gte=timeframe)
 
+    all_ids = []
+    for m in measurables:
+        all_ids.append(m.id)
+    print(all_ids)
 
+    display_name = ''
+    for m in measurables:
+        if m.id is mId:
+            display_name = m.name
 
     all_times = [m.timestamp for m in all_entries]
 
@@ -50,6 +55,7 @@ def get_data(request, *args, **kwargs):
     data = {
         "labels": all_times,
         "default": all_data,
+        "name": display_name
     }   
 
     return JsonResponse(data)
