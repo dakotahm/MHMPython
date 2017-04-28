@@ -7,4 +7,8 @@
 
 .download-body{
     border-bottom: 1px solid #999999;
+    /*padding-left:10px;*/
+}
+#log-container{
+    padding-left: -1px;
 }
