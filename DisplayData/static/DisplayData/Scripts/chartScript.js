@@ -1,8 +1,9 @@
 /**
  * Created by Dakotah on 4/27/2017.
  */
+;
 $("document").ready(function () {
-     var input =$('#measurable-dropdown li:first').children().first().text();
+    var input =$('#measurable-dropdown li:first').children().first().text();
     var id=$('#measurable-dropdown li:first').attr('class');
     $('#MeasurableDropdownTitle').text(input);
     $('#MeasurableDropdownTitle').attr('class',id);
@@ -23,6 +24,7 @@ $.ajax({
 		defaultLabels = data.labels;
 		defaultData = data.default;
 		defaultName = data.name;
+        backgroundColor = data.bgcolor
 		console.log(data);
 		var ctx = document.getElementById("myChart");
 		var myChart = new Chart(ctx, {
@@ -32,7 +34,8 @@ $.ajax({
 		        datasets: [{
 		            label: defaultName,
 		            data: defaultData,
-		            borderWidth: 1
+		            borderWidth: 1,
+                    backgroundColor: backgroundColor
 		        }]
 		    },
 		    options: {
@@ -87,7 +90,7 @@ $.ajax({
                     data: {
                         labels: defaultLabels,
                         datasets: [{
-                            label: defaultName,
+                            label: "Measurable",
                             data: defaultData,
                             borderWidth: 1
                         }]

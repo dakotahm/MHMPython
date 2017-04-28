@@ -22,7 +22,6 @@ def DisplayView(request):
 
 def get_data(request, *args, **kwargs):
 
-
     #Here is the measurable Id and time (in python datetime from the form!!!!!!!!!!!!!!!!!!
     print(request.GET)
     mId=request.GET['measurableId']
@@ -30,20 +29,30 @@ def get_data(request, *args, **kwargs):
     print(mId)
     print(timeframe)
 
-    measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    all_measurables= models.Measurables.objects.all().filter(user_id=request.user.id)
     all_entries = models.Entries.objects.all().filter(parent=mId).filter(timestamp__gte=timeframe)
 
+    print(all_entries)
+
     all_ids = []
-    for m in measurables:
+    for m in all_measurables:
         all_ids.append(m.id)
     print(all_ids)
 
     display_name = ''
-    for m in measurables:
-        if m.id is mId:
+    for m in all_measurables:
+        if m.id == mId:
             display_name = m.name
 
-    all_times = [m.timestamp for m in all_entries]
+    print(display_name)
+
+    all_times = []
+
+    for m in all_entries:
+        time = m.timestamp
+        print(time)
+        formatted_time = time.strftime("%b %d %Y %H:%M:%S")
+        all_times.append(formatted_time)
 
     all_data = []
     for m in all_entries:
@@ -52,10 +61,13 @@ def get_data(request, *args, **kwargs):
         value = json_data['value']
         all_data.append(value)
 
+    bg_color = "rgba(117, 201, 196, 0.5)"
+
     data = {
         "labels": all_times,
         "default": all_data,
-        "name": display_name
+        "name": display_name,
+        "bgcolor": bg_color
     }   
 
     return JsonResponse(data)
