@@ -16,7 +16,8 @@ from RecordEvent.forms import LogForm,ValidateRecordEvent,ValidateNewLog
 
 @login_required
 def DisplayView(request):
-    return render(request,'DisplayData/Display.html')
+    measurables = [entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
+    return render(request,'DisplayData/Display.html',{'dropdown':measurables})
 
 
 def get_data(request, *args, **kwargs):
@@ -25,7 +26,18 @@ def get_data(request, *args, **kwargs):
     #all_entries = models.Entries.objects.all().filter(parent=2) #change to input from textfield or change to 2
     all_entries = models.Entries.objects.all().filter(parent=2)
 
-    
+
+
+    #Here is the measurable Id and time (in python datetime from the form!!!!!!!!!!!!!!!!!!
+    print(request.GET)
+    mId=request.GET['measurableId']
+    timeframe = LogFunctions.gettime(request.GET['timeframe'])
+    print(mId)
+    print(timeframe)
+
+
+
+
     all_times = [m.timestamp for m in all_entries]
 
     all_data = []

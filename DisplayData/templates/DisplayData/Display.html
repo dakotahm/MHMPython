@@ -41,8 +41,7 @@
         </div>
     </div>
 </div>
-<script src="{% static 'DisplayData/Scripts/dropScript.js' %}"></script>
-
+<script src="{% static "DisplayData/Scripts/chartScript.js" %}"></script>
 <div class='padded'>
 	<div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
 		<h1>Graph Data</h1>
@@ -50,50 +49,6 @@
 	</div>	
 </div>
 
-<script>
-{% block jquery %}
-//var endpoint = 'display/api/chart/data/'
-var endpoint = 'api/data/'
-//var endpoint = 'display/dropdown/display/api/chart/data/'
-var defaultData = []
-var defaultLabels = [];
-$.ajax({
-	method: "GET",
-	url: endpoint,
-	success: function(data){
-		defaultLabels = data.labels
-		defaultData = data.default
-		defaultName = data.name
-		console.log(data)
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
-		    type: 'line',
-		    data: {
-		        labels: defaultLabels,
-		        datasets: [{
-		            label: defaultName,
-		            data: defaultData,
-		            borderWidth: 1
-		        }]
-		    },
-		    options: {
-		        scales: {
-		            yAxes: [{
-		                ticks: {
-		                    beginAtZero:true
-		                }
-		            }]
-		        }
-		    }
-		});
-	},
-	error: function(error_data){
-		console.log("error")
-		console.log(error_data)
-	}
-})
-{% endblock %}
-</script>
 
 <script src="{% static 'DisplayData/Scripts/navScript.js' %}"></script>
 {% endblock %}
