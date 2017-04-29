@@ -71,14 +71,6 @@ def get_data(request, *args, **kwargs):
     }   
 
     return JsonResponse(data)
-    '''
-    data = {
-        "sales": 100,
-        "customers": 10,
-    }
-    return JsonResponse(data)
-    '''
-
 
 class ChartData(APIView):
     authentication_classes = []
@@ -120,6 +112,7 @@ class ChartData(APIView):
 
 @login_required
 def LogDisplay(request):
+    """Displays the logs for the user post handles dropdown change"""
     measurables=[entry for entry in models.Measurables.objects.all().filter(user_id=request.user.id)]
     if (request.method == 'POST' and request.is_ajax()):
 

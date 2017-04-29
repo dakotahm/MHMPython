@@ -4,10 +4,7 @@
 $("document").ready(function () {
         $('.typeSelect li').on('click',function () {
             document.getElementById("measurable").value=$(this).attr("type");
-            console.log(document.getElementById("measurable"));
-            console.log(document.getElementById("measurable").value);
-            console.log($(this));
-            console.log($(this).attr("type"));
+            $('#dropdownTitle').text($(this).attr("type"));
         });
     });
 
@@ -25,7 +22,6 @@ $('#id_valueText').on('input', function() {
            $("#submitDisabled").attr('class','pull-right disabled')
 
      }
-       // console.log( document.getElementById("measurable").value);
 });
 });
 
@@ -43,7 +39,6 @@ $('#id_NameText').on('input', function() {
            $("#submitDisabled").attr('class','pull-right disabled')
 
      }
-       // console.log( document.getElementById("measurable").value);
 });
 
 $('#id_max').on('input', function() {
@@ -56,7 +51,6 @@ $('#id_max').on('input', function() {
            $("#submitDisabled").attr('class','pull-right disabled')
 
      }
-       // console.log( document.getElementById("measurable").value);
 });
 
 $('#id_min').on('input', function() {
@@ -69,6 +63,5 @@ $('#id_min').on('input', function() {
            $("#submitDisabled").attr('class','pull-right disabled')
 
      }
-       // console.log( document.getElementById("measurable").value);
 });
 });

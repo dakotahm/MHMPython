@@ -7,14 +7,10 @@ from .forms import LogForm,ValidateRecordEvent,ValidateNewLog
 
 @login_required
 def index(request):
-
+    """Displays the html and handles post requests """
 
     # code for current userid
     current_user = request.user
-    print(current_user)
-    print(current_user.id)
-
-    #hardcoded user1 for testing
     Measurables=[ entry for entry in models.Measurables.objects.all().filter(user_id=current_user.id)]
 
     if (request.method=='POST'):
@@ -33,18 +29,16 @@ def index(request):
             #handle error and proceed
             pass
 
-
-
     else:
         form=LogForm()
         print("blank form")
-        #test = int('fail')
 
     return render(request,'RecordEvent/Record.html',{'dropdown':Measurables})
 
 
 @login_required
 def insertMeasurable(request):
+    """Displays the html and handles post requests """
     if (request.method == 'POST'):
         print(request.user.id)
         name = request.POST.get('name', '')

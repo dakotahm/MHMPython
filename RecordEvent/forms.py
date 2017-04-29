@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 class LogForm(forms.Form):
+    """Primary form for measurable collection"""
     valueText=forms.IntegerField()
     tagText = forms.CharField(100)
     locationText = forms.CharField(100)
@@ -13,6 +14,7 @@ class LogForm(forms.Form):
 
 
 class ValidateRecordEvent():
+    """Preforms input validation on add entry form"""
     def __init__(self,dateInput,timeInput,log,value,measureId,userid,location):
          self.__dateInput=dateInput
          self.__timeInput=timeInput
@@ -24,6 +26,7 @@ class ValidateRecordEvent():
 
     @property
     def jsonInput(self):
+        """Validate JSON string"""
         try:
             dict={'log':self.__log,'value':int(self.__value),'location':self.__location}
             return json.dumps(dict)
@@ -32,6 +35,7 @@ class ValidateRecordEvent():
 
     @property
     def theDate(self):
+        """Validates date input format"""
         try:
             datelist=[int(date) for date in self.__dateInput.split('/')]
             timelist=[int(time) for time in self.__timeInput.split(':')]
@@ -48,6 +52,7 @@ class ValidateRecordEvent():
             return None
     @property
     def ValidateAndSave(self):
+        """If everything checks out add to DB and return true"""
         result=[self.jsonInput,self.theDate]
         if None in result:
             return False
@@ -58,6 +63,7 @@ class ValidateRecordEvent():
 
 
 class ValidateNewLog():
+    """Validates the add log page"""
     def __init__(self,name,maxVal,minVal,userId,type):
         self.__name=name
         self.__max=maxVal
@@ -74,6 +80,7 @@ class ValidateNewLog():
 
     @property
     def validateMaxMin(self):
+        """Ensures that the max and min are within bounds"""
         try:
             maxVal=int(self.__max)
             minVal=int(self.__min)
